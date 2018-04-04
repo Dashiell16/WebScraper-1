@@ -1,5 +1,4 @@
 var knwl = require('./node_modules/knwl.js/knwl.js'),
-    cheerio = require('./node_modules/cheerio/index.js'),
     knwlInstance = new knwl('english'),
     request = require('request');
 
