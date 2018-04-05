@@ -1,4 +1,4 @@
-var knwl = require('./node_modules/knwl.js/knwl.js'),
+var knwl = require('knwl.js'),
     knwlInstance = new knwl('english'),
     readline = require('readline'),
     request = require('request');
