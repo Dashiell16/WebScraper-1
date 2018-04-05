@@ -1,6 +1,7 @@
 var knwl = require('knwl.js'),
     knwlInstance = new knwl('english'),
     readline = require('readline'),
+    unique = require('array-unique'),
     request = require('request');
 
 var rl = readline.createInterface({
@@ -19,7 +20,9 @@ rl.question('Input an email address: ', function(strInput) {
         else {
             knwlInstance.init(body);
             var arrPhones = knwlInstance.get('phones') ,
-            arrEmails = knwlInstance.get('emails') ;
+            arrEmails = knwlInstance.get('emails');
+            arrPhones = unique(arrPhones);
+            arrEmails = unique(arrEmails);
         
             if(arrPhones.length == 0){
                 console.log("No phone numbers found");
@@ -33,6 +36,7 @@ rl.question('Input an email address: ', function(strInput) {
                 console.log(arrPhones);
                 console.log("------------------------------");
             }
+
             if(arrEmails.length == 0){
                 console.log("No email addresses found");
             }
@@ -47,3 +51,4 @@ rl.question('Input an email address: ', function(strInput) {
     });
     rl.close();
 });
+
