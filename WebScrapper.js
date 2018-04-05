@@ -9,11 +9,12 @@ var rl = readline.createInterface({
     output: process.stdout
 });
 
+
 rl.question('Input an email address: ', function(strInput) {
     console.log(" ");
     var arrInput = strInput.split("@");
     
-    request("https://www." + arrInput[1], function(err, response, body) {
+    request("http://www." + arrInput[1], function(err, response, body) {
         if (err) {
             console.log(err);
         }
@@ -21,19 +22,19 @@ rl.question('Input an email address: ', function(strInput) {
             knwlInstance.init(body);
             var arrPhones = knwlInstance.get('phones') ,
             arrEmails = knwlInstance.get('emails');
-            arrPhones = unique(arrPhones);
-            arrEmails = unique(arrEmails);
         
             if(arrPhones.length == 0){
                 console.log("No phone numbers found");
                 console.log("------------------------------");
             }
             else{
-                for(var i = 0; i <= (arrPhone.length - 1); i++){
-                    delete arrPhone[i]['preview'];
-                    delete arrPhone[i]['found'];
+                var arrUPhones = Array();
+                for(var i = 0; i <= (arrPhones.length - 1); i++){
+                    delete arrPhones[i]['preview'];
+                    delete arrPhones[i]['found'];
+                    arrUPhones[i] = arrPhones[i]['phone'];
                 }
-                console.log(arrPhones);
+                console.log(unique(arrUPhones));
                 console.log("------------------------------");
             }
 
@@ -41,14 +42,17 @@ rl.question('Input an email address: ', function(strInput) {
                 console.log("No email addresses found");
             }
             else{
+                var arrUEmails = new Array();
                 for(var i = 0; i <= (arrEmails.length - 1); i++){
                     delete arrEmails[i]['preview'];
                     delete arrEmails[i]['found'];
+                    arrUEmails[i] = arrEmails[i]['address'];
                 }
-                console.log(arrEmails);
+                console.log(unique(arrUEmails));
             }
         }
     });
     rl.close();
 });
+
 
